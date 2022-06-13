@@ -1,0 +1,28 @@
+.content-login{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background: rgb(150,80,80);
+    background: radial-gradient(circle, rgba(150,80,80,1) 39%, rgba(252,155,119,1) 65%, rgba(150,80,80,1) 100%);
+    color:
+}
+
+.img--login{
+    width: 150px;
+}
+
+.login-title{
+    color: #fff;
+}
+
+.login-subtitle{
+    color: #fff;
+}
+
+.login--form label{
+    color: #fff;
+}

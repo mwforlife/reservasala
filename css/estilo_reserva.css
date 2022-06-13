@@ -1,0 +1,91 @@
+body{
+    height: 100vh;
+    width: 100%;
+}
+
+.header{
+    background-color: darkslategrey;
+    margin: 0;
+    padding: 10px;
+}
+
+.img--menu{
+    width: 130px;
+}
+
+.menu--link{
+    color: #fff;
+}
+.menu--items{
+    padding-right: 56px;
+}
+.submenu--link{
+    color: #fff;
+}
+
+.submenu--items{
+    background-color:darkolivegreen;
+    padding: 10px;
+    width: auto;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.submenu--link{
+    padding: 5px;
+}
+
+.content-reserve{
+    margin-top: 125px;
+    display: flex;
+    flex-direction: column;
+}
+.welcome{
+    padding: 10px;
+    padding-left: 40px;
+    font-family: serif;
+    margin-left: 200px;
+}
+
+.subtitle{
+    align-self: center;
+    font-family: serif;
+}
+
+.lab--img{
+    align-self: center;
+}
+
+.mis-reservas{
+    position: fixed;
+    width: 200px;
+    height: 79vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+.bloque{
+    background: #543;
+    text-align: center;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    background: radial-gradient(ellipse at 50% 50%,rgba(233, 36, 79, 1), rgba(143, 255, 150, 1))
+}
+
+.submenu--items{
+    display: none;
+    margin: 0;
+}
+
+.menu--link:focus-within ~ .submenu--items{
+    display: block;
+}
+
+.reserve{
+    background: none;
+    border: none;
+}
