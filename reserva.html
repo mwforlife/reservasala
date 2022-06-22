@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="es">
 
 <head>
 	<meta charset="utf-8">
@@ -11,6 +11,8 @@
 	<link rel="stylesheet" href="css/normalize.css">
 	<link rel="stylesheet" href="css/animate.min.css">
 	<link rel="stylesheet" href="css/colores.css">
+	<link rel="stylesheet" href="css/jquery-ui.structure.min.css">
+	<link rel="stylesheet" href="css/jquery-ui.theme.min.css">
 	<link rel="stylesheet" href="css/estilo_reserva.css">
 	<link rel="icon" type="image/x-icon" href="img/log.png"/>
 </head>
@@ -114,6 +116,12 @@
 							<option value="0" disabled>Seleccione:</option>
 						</select>
 					</div>
+					<div class="col-md-12">
+					    <label for="">Curso:</label>
+					    <select name="curso" id="curso" class="form-control">
+					        
+					    </select>
+					</div>
 				</div>
 				<div class="row">
 				<div class="col-md-6 col-lg-6">
@@ -183,7 +191,7 @@
 				<h5 class="modal-title" id="staticBackdropLabel">Mis Reservas</h5>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			  </div>
-			  <div class="modal-body d-flex flex-wrap justify-content-center gap-3">
+			  <div id="reserva__list" class="modal-body d-flex flex-wrap justify-content-center gap-3">
 				
 					<button class="reserve">
 						<div class="bloque">
@@ -255,6 +263,7 @@
 	<script type="text/javascript" src="js/anime.min.js"></script>
 	<script src="js/favicons.js"></script>
 	<script src="js/sweetalert2.all.min.js"></script>
+	<script src="js/jquery-ui.min.js"></script>
 	<script src="js/funciones.js"></script>
 	<script src="js/query.js"></script>
 </body>

@@ -1,9 +1,104 @@
-function registrar(){
-    
+function registrarUsuario(){
+    var rut = $("#ruttxt").val();
+    var nombre = $("#nomtxt").val();
+    var apellido = $("#apetxt").val();
+    var mail = $("#ematxt").val();
+    var pas = $("#pastxt").val();
+
+    var Data = $("#registerForm").serialize();
+
+    if(validarcampos(rut) && validarcampos(nombre) && validarcampos(apellido) && validarcampos(mail) && validarcampos(pas)){
+        $.ajax({
+            url: "../php/registrarUsuario.php",
+            type: "POST",
+            data: Data,
+            success: function(data){
+                if(data == "1"){
+                    alert("Usuario registrado correctamente");
+                    $("#registerForm").reset();
+                }else{
+                    alert("Error al registrar usuario");
+                }
+            }
+        });
+    }else{
+        alert("Debe llenar todos los campos");
+    }
 }
 
-function validar(){
-    
+function resetearContrasena(){
+    var email = $("#email__reset").val();
+    if(validarcampos(email)){
+        $.ajax({
+            url: "../php/resetearContrasena.php",
+            type: "POST",
+            data: "email="+email,
+            success: function(data){
+                if(data == "1"){
+                    alert("Contraseña reseteada correctamente");
+                    location.reload();
+                }else{
+                    alert("Error al resetear contraseña");
+                }
+            }
+        });
+    }
+}
+
+function iniciarSesion(){   
+    var email = $("#email").val();
+    var pass = $("#pass").val();
+    if(validarcampos(email) && validarcampos(pass)){
+        $.ajax({
+            url: "../php/iniciarSesion.php",
+            type: "POST",
+            data: "email="+email+"&pass="+pass,
+            success: function(data){
+                if(data == "1"){
+                    windows.location.href = "../reserva.php";
+                }else{
+                    alert("Error al iniciar sesión");
+                }
+            }
+        });
+    }
+}
+
+document.ready(function(){
+    $("#registerForm").on('submit',function(e){
+        e.preventDefault();
+            registrarUsuario();
+    });
+
+    $("#resetForm").on('submit',function(e){
+        e.preventDefault();
+            resetearContrasena();
+    });
+
+    $("#loginForm").on('submit',function(e){
+        e.preventDefault();
+            iniciarSesion();
+    });
+
+    $("#date").on('change',function(e){
+        e.preventDefault();
+            var date = $("#date").val();
+            if (validarcampos(date)) {
+               desplegarbloques(date);
+            }else{
+                alert("Debe seleccionar una fecha");
+            }
+    });
+
+});
+
+function validarcampos(valor){
+    if(valor.length.trim()==0){
+        return false;
+    }else{
+        return true;
+    }
+
 }
 
 function desplegarsalas(){
@@ -22,4 +117,19 @@ function desplegarsalas(){
         $("#sala").append("<option value='0' disabled>Seleccione:</option>");
         
     }
+}
+
+function desplegarbloques(valor){
+    $.ajax({
+        url: "../php/DesplegarBloques.php",
+        type: "POST",
+        data: "date="+date,
+        success: function(data){
+            if(data == "1"){
+                alert("Fecha disponible");
+            }else{
+                alert("Fecha no disponible");
+            }
+        }
+    });
 }
