@@ -1,3 +1,10 @@
+<?php
+require 'php/controller.php';
+
+$c = new Controller();
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -108,18 +115,24 @@
 				<div class="row">
 					<div class="col-md-6 col-lg-6">
 						<label for="">Cantidad de Alumnos:</label>
-						<input type="number" oninput="desplegarsalas()" name="cantidad" id="cantidad" placeholder="Cantidad de Alumnos" class="form-control">
+						<input type="number" min="0" oninput="desplegarsalas()" name="cantidad" id="cantidad" placeholder="Cantidad de Alumnos" class="form-control">
 					</div>
 					<div class="col-md-6 col-lg-6">
 						<label for="">Sala:</label>
 						<select name="sala" id="sala" class="form-control">
-							<option value="0" disabled>Seleccione:</option>
+							<option value="0">Seleccione:</option>
 						</select>
 					</div>
 					<div class="col-md-12">
 					    <label for="">Curso:</label>
 					    <select name="curso" id="curso" class="form-control">
-					        
+					        <?php
+								$lista = $c->listarcursos();
+								for ($i=0; $i < count($lista); $i++) { 
+									$cu = $lista[$i];
+									echo "<option value='".$cu->getId()."' >".$cu->getNombre()."</option>";
+								}
+							?>
 					    </select>
 					</div>
 				</div>
@@ -130,16 +143,10 @@
 				</div>
 					<div class="col-md-6 col-lg-6">
 						<label for="">Fecha:</label>
-						<input type="text" name="date" id="date" class="form-control">
+						<input type="text" onchange="desplegarbloques()" name="date" id="date" class="form-control">
 					</div>
 					<hr/>
-					<div class="col-md-12 col-lg-12 d-flex justify-content-center flex-wrap gap-3">
-					
-						<input type="radio" class="btn-check" name="options" id="option1" autocomplete="off" checked>
-						<label class="btn btn-danger" for="option1">
-						Bloque 1<br/>
-						08:00
-						</label>
+					<div id="blocks" class="col-md-12 col-lg-12 d-flex justify-content-center flex-wrap gap-3">
 						
 						<input type="radio" class="btn-check" name="options" id="option1" autocomplete="off" checked>
 						<label class="btn btn-success" for="option1">Bloque 1<br/>
@@ -150,24 +157,6 @@
 						<label class="btn btn-success" for="option1">Bloque 1<br/>
 						08:00</label>
 						
-						
-						<input type="radio" class="btn-check" name="options" id="option1" autocomplete="off" checked>
-						<label class="btn btn-danger" for="option1">Bloque 1<br/>
-						08:00</label>
-						
-						<input type="radio" class="btn-check" name="options" id="option1" autocomplete="off" checked>
-						<label class="btn btn-danger" for="option1">Bloque 1<br/>
-						08:00</label>
-						
-						
-						<input type="radio" class="btn-check" name="options" id="option1" autocomplete="off" checked>
-						<label class="btn btn-danger" for="option1">Bloque 1<br/>
-						08:00</label>
-						
-						
-						<input type="radio" class="btn-check" name="options" id="option1" autocomplete="off" checked>
-						<label class="btn btn-danger" for="option1">Bloque 1<br/>
-						08:00</label>
 						
 						
 					</div>

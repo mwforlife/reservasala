@@ -58,6 +58,33 @@ nombre varchar(30) not null
 );
 
 insert into curso values(null,'3 y 4 Medio Electivo');
+insert into curso(nombre) values('1 Basico A');
+insert into curso(nombre) values('1 Basico B');
+insert into curso(nombre) values('2 Basico A');
+insert into curso(nombre) values('2 Basico B');
+insert into curso(nombre) values('3 Basico A');
+insert into curso(nombre) values('3 Basico B');
+insert into curso(nombre) values('4 Basico A');
+insert into curso(nombre) values('4 Basico B');
+insert into curso(nombre) values('5 Basico A');
+insert into curso(nombre) values('5 Basico B');
+insert into curso(nombre) values('6 Basico A');
+insert into curso(nombre) values('6 Basico B');
+insert into curso(nombre) values('7 Basico A');
+insert into curso(nombre) values('7 Basico B');
+insert into curso(nombre) values('8 Basico A');
+insert into curso(nombre) values('8 Basico B');
+insert into curso(nombre) values('1 Medio A');
+insert into curso(nombre) values('1 Medio B');
+insert into curso(nombre) values('2 Medio A');
+insert into curso(nombre) values('2 Medio B');
+insert into curso(nombre) values('3 Medio');
+insert into curso(nombre) values('4 Medio');
+insert into curso(nombre) values('Prekinder A');
+insert into curso(nombre) values('Prekinder B');
+insert into curso(nombre) values('Kinder A');
+insert into curso(nombre) values('Kinder B');
+
 
 create table reserva(
 id_res int not null auto_increment primary key,

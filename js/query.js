@@ -9,7 +9,7 @@ function registrarUsuario(){
 
     if(validarcampos(rut) && validarcampos(nombre) && validarcampos(apellido) && validarcampos(mail) && validarcampos(pas)){
         $.ajax({
-            url: "../php/registrarUsuario.php",
+            url: "php/registrarUsuario.php",
             type: "POST",
             data: Data,
             success: function(data){
@@ -30,7 +30,7 @@ function resetearContrasena(){
     var email = $("#email__reset").val();
     if(validarcampos(email)){
         $.ajax({
-            url: "../php/resetearContrasena.php",
+            url: "php/resetearContrasena.php",
             type: "POST",
             data: "email="+email,
             success: function(data){
@@ -50,7 +50,7 @@ function iniciarSesion(){
     var pass = $("#pass").val();
     if(validarcampos(email) && validarcampos(pass)){
         $.ajax({
-            url: "../php/iniciarSesion.php",
+            url: "php/iniciarSesion.php",
             type: "POST",
             data: "email="+email+"&pass="+pass,
             success: function(data){
@@ -64,7 +64,7 @@ function iniciarSesion(){
     }
 }
 
-document.ready(function(){
+$(document).ready(function(){
     $("#registerForm").on('submit',function(e){
         e.preventDefault();
             registrarUsuario();
@@ -80,20 +80,10 @@ document.ready(function(){
             iniciarSesion();
     });
 
-    $("#date").on('change',function(e){
-        e.preventDefault();
-            var date = $("#date").val();
-            if (validarcampos(date)) {
-               desplegarbloques(date);
-            }else{
-                alert("Debe seleccionar una fecha");
-            }
-    });
-
 });
 
 function validarcampos(valor){
-    if(valor.length.trim()==0){
+    if(valor.trim().length ==0){
         return false;
     }else{
         return true;
@@ -105,31 +95,38 @@ function desplegarsalas(){
     var cantidad = $("#cantidad").val();
     if(cantidad>0 && cantidad<=14){
         $("#sala option").remove();
-        $("#sala").append("<option value='0' disabled>Seleccione:</option>");
+        $("#sala").append("<option value='0' >Seleccione:</option>");
         $("#sala").append("<option value='1'>Laboratorio Computación - 14 Estudiantes Max</option>");
         $("#sala").append("<option value='2'>Sala Computación</option>");
     }else if(cantidad>14){
         $("#sala option").remove();
-        $("#sala").append("<option value='0' disabled>Seleccione:</option>");
+        $("#sala").append("<option value='0' >Seleccione:</option>");
         $("#sala").append("<option value='1'>Sala Computación </option>");
     }else if(cantidad<=0){
         $("#sala option").remove();
-        $("#sala").append("<option value='0' disabled>Seleccione:</option>");
+        $("#sala").append("<option value='0' >Seleccione:</option>");
         
     }
 }
 
-function desplegarbloques(valor){
+function desplegarbloques(){
+    
+    var date = $("#date").val();
+    var lab = $("#sala").val();
+
+    if (validarcampos(date) && lab>0) {
+
     $.ajax({
-        url: "../php/DesplegarBloques.php",
+        url: "php/DesplegarBloques.php",
         type: "POST",
-        data: "date="+date,
+        data: "date="+date+"&lab="+lab,
         success: function(data){
-            if(data == "1"){
-                alert("Fecha disponible");
-            }else{
-                alert("Fecha no disponible");
-            }
+            $("#blocks input").remove();
+            $("#blocks label").remove();
+            $("#blocks").append(data);
         }
     });
+    }else{
+        alert("Debe seleccionar una fecha y una sala");
+    }
 }
