@@ -16,7 +16,7 @@ for ($i=0; $i < count($lista2); $i++) {
     for ($y=0; $y < $lista1; $y++) { 
         $blo = $lista1[$y];
         if ($b->getId() == $blo->getId()) {
-            echo "<input disabled type='radio' class='btn-check' name='options' value='".$b->getId()."' id='option".($i+1)."' autocomplete='off' checked>";
+            echo "<input disabled type='radio' class='btn-check' name='options' value='".$b->getId()."' id='option".($i+1)."' autocomplete='off'>";
             echo "<label class='btn btn-danger' for='option".($i+1)."'>".$b->getNombre()."<br/>".$b->getHorario()."</label>";
             $existe=true;
             break;
@@ -28,7 +28,7 @@ for ($i=0; $i < count($lista2); $i++) {
     }
     
     if ($existe==false) {
-        echo "<input type='radio' class='btn-check' name='options' value='".$b->getId()."' id='option".($i+1)."' autocomplete='off' checked>";
+        echo "<input type='radio' class='btn-check' name='options' value='".$b->getId()."' id='option".($i+1)."' autocomplete='off'>";
         echo "<label class='btn btn-success' for='option".($i+1)."'>".$b->getNombre()."<br/>".$b->getHorario()."</label>";
     }
    
