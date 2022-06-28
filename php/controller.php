@@ -175,7 +175,7 @@ class Controller{
     //Listado de Cursos
     public function listarcursos(){
         $this->conexion();
-        $sql = "select * from curso";
+        $sql = "select * from curso order by nombre asc";
         $result = $this->mi->query($sql);
         $cursos = array();
         while ($rs = mysqli_fetch_array($result)) {
