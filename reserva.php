@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (!isset($_SESSION['id'])) {
+	header('Location: index.php');
+}
+
 require 'php/controller.php';
 
 $c = new Controller();
@@ -29,6 +34,18 @@ $c = new Controller();
 	<div class="details">
 		<h6 class="text-center">Reservas de Hoy</h6>
 		
+		<?php
+		$lista = $c->listarreservashoy($_SESSION['id']);
+		for ($i=0; $i < count($lista); $i++) { 
+			$r = $lista[$i];
+			echo '<div class="reserva">';
+			echo '<div class="bloque">';
+			echo '<h6 class="name">Bloque: '.$r->getBloque().'</h6>';
+			echo '<h6 class="curso">Curso: '.$r->getCurso().'</h6>';
+			echo '<h6 class="asignatura">Asignatura: '.$r->getAsignatura().'</h6>';
+		}
+		?>
+
 		<div class="reserve">
 			<div class="bloque">
 				<h6 class="name">Bloque 1</h6>
@@ -88,7 +105,7 @@ $c = new Controller();
 	</header>
 	
 	<main class="content-reserve">
-		<h3 class="welcome">Bienvenido, Usuario</h3>
+		<h3 class="welcome">Bienvenid@, <?php echo $_SESSION['nombre'] ?></h3>
 		<h2 class="subtitle">Registra Su Hora para evitar retrasos en sus actividades</h2>
 		<img src="img/lab.png" alt="" class="lab--img">
 	</main>
@@ -110,7 +127,7 @@ $c = new Controller();
 			<h5 class="modal-title" id="staticBackdropLabel">Reserva</h5>
 			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		  </div>
-		  <form action="">
+		  <form action="" id="reservaForm">
 			  <div class="modal-body">
 				<div class="row">
 					<div class="col-md-6 col-lg-6">
@@ -182,6 +199,20 @@ $c = new Controller();
 			  </div>
 			  <div id="reserva__list" class="modal-body d-flex flex-wrap justify-content-center gap-3">
 				
+								<?php
+								$lista = $c->listarreserva($_SESSION['id']);
+								for ($i=0; $i < count($lista); $i++) { 
+									$r = $lista[$i];
+									echo '<div class="reserve">';
+									echo '<div class="bloque">';
+									echo '<h6 class="name">Bloque: '.$r->getBloque().'</h6>';
+									echo "<h6 class='name'>Fecha: ".$r->getFecha()."</h6>";
+									echo '<h6 class="curso">Curso: '.$r->getCurso().'</h6>';
+									echo '<h6 class="asignatura">Asignatura: '.$r->getAsignatura().'</h6>';
+									
+								}
+								?>
+
 					<button class="reserve">
 						<div class="bloque">
 							<h6 class="name">Bloque 1</h6>

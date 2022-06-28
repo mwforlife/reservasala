@@ -20,6 +20,19 @@ class Controller{
         $this->mi->close();
     }
 
+    public function comprobarusuario($rut, $correo){
+        $this->conexion();
+        $sql = "select * from users where rut = '$rut' or correo = '$correo'";
+        $result = $this->mi->query($sql);
+        if ($rs = mysqli_fetch_array($result)) {
+            $this->desconexion();
+            return 3;
+        }else{
+            $this->desconexion();
+            return 0;
+        }
+    }
+
     //Registrar Usuarios
     public function registrarUsuarios($rut, $nombre, $apellido, $tipo, $correo, $password, $token){
         $this->conexion();
@@ -88,27 +101,39 @@ class Controller{
             if ($rs = mysqli_fetch_array($result)) {
                 $id = $rs['id'];
                 $this->desconexion();
-                $this->registrarbloque($id, $bloque);
+                $result = $this->registrarbloque($id, $bloque);
+                return $result;
             }
         }
        
     }
 
     //Llenado Nub reservas
-    public function registrarbloque($bloque, $reserva){
+    public function registrarbloque($reserva,$bloque){
         $this->conexion();
         $sql = "insert into detalles_reserva values(null, $reserva, $bloque)";
         $result = json_encode($this->mi->query($sql));
         $this->desconexion();
-        if($result == true){
-
-        }
+        return $result;
     }
 
     //Lista de reservas
     public function listarreserva($usuario){
         $this->conexion();
-        $sql = "select id_res, cant_alu as cantidad, id_sal, asignatura, fecha, curso.nombre as id_cur, bloques.nombre as bloque, bloques.horario as horario, id_usu from reserva,bloques, detalles_reserva,curso where reserva.id_res = detalles_reserva.id_res and detalles_reserva.id_blo = bloques.id_blo and reserva.id_cur = curso.id_cur and reserva.id_usu = $usuario";
+        $sql = "select reserva.id_res, cant_alu as cantidad, id_sal, asignatura, fecha, curso.nombre as id_cur, bloques.nombre as bloque, bloques.hora as horario, id_usu from reserva,bloques, detalles_reserva,curso where reserva.id_res = detalles_reserva.id_res and detalles_reserva.id_blo = bloques.id_blo and reserva.id_cur = curso.id_cur and reserva.id_usu = $usuario";
+        $result = $this->mi->query($sql);
+        $reservas = array();
+        while ($rs = mysqli_fetch_array($result)) {
+            $reserva = new Reserva($rs['id_res'], $rs['cantidad'], $rs['id_sal'], $rs['asignatura'], $rs['fecha'], $rs['id_cur'], $rs['bloque']. "\n" . $rs["horario"], $rs['id_usu']);
+            $reservas[] = $reserva;
+        }
+        $this->desconexion();
+        return $reservas;
+    }
+    //Lista de reservas Hoy
+    public function listarreservashoy($usuario){
+        $this->conexion();
+        $sql = "select reserva.id_res, cant_alu as cantidad, id_sal, asignatura, fecha, curso.nombre as id_cur, bloques.nombre as bloque, bloques.hora as horario, id_usu from reserva,bloques, detalles_reserva,curso where reserva.id_res = detalles_reserva.id_res and detalles_reserva.id_blo = bloques.id_blo and reserva.id_cur = curso.id_cur and reserva.id_usu = $usuario and fecha=curdate();";
         $result = $this->mi->query($sql);
         $reservas = array();
         while ($rs = mysqli_fetch_array($result)) {

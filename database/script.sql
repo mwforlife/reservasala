@@ -57,7 +57,6 @@ id_cur int not null auto_increment primary key,
 nombre varchar(30) not null
 );
 
-insert into curso values(null,'3 y 4 Medio Electivo');
 insert into curso(nombre) values('1 Basico A');
 insert into curso(nombre) values('1 Basico B');
 insert into curso(nombre) values('2 Basico A');
@@ -84,6 +83,9 @@ insert into curso(nombre) values('Prekinder A');
 insert into curso(nombre) values('Prekinder B');
 insert into curso(nombre) values('Kinder A');
 insert into curso(nombre) values('Kinder B');
+insert into curso values(null,'3 y 4 Medio Electivo');
+insert into curso values(null,'Sala Computación');
+insert into curso values(null,'Laboratorio Computación');
 
 
 create table reserva(
