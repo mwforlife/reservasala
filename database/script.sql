@@ -100,6 +100,6 @@ id_usu int not null references users(id_usu)
 
 create table detalles_reserva(
 id_det int not null auto_increment primary key,
-id_res int not null references reserva,
+id_res int not null references reserva(id_res),
 id_blo int not null references bloques(id_blo)
 );

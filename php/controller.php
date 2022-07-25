@@ -124,7 +124,7 @@ class Controller{
         $result = $this->mi->query($sql);
         $reservas = array();
         while ($rs = mysqli_fetch_array($result)) {
-            $reserva = new Reserva($rs['id_res'], $rs['cantidad'], $rs['id_sal'], $rs['asignatura'], $rs['fecha'], $rs['id_cur'], $rs['bloque']. "\n" . $rs["horario"], $rs['id_usu']);
+            $reserva = new Reserva($rs['id_res'], $rs['cantidad'], $rs['id_sal'], $rs['asignatura'], $rs['fecha'], $rs['id_cur'], $rs['bloque']. "<br/>" . $rs["horario"], $rs['id_usu']);
             $reservas[] = $reserva;
         }
         $this->desconexion();
@@ -137,7 +137,7 @@ class Controller{
         $result = $this->mi->query($sql);
         $reservas = array();
         while ($rs = mysqli_fetch_array($result)) {
-            $reserva = new Reserva($rs['id_res'], $rs['cantidad'], $rs['id_sal'], $rs['asignatura'], $rs['fecha'], $rs['id_cur'], $rs['bloque']. "\n" . $rs["horario"], $rs['id_usu']);
+            $reserva = new Reserva($rs['id_res'], $rs['cantidad'], $rs['id_sal'], $rs['asignatura'], $rs['fecha'], $rs['id_cur'], $rs['bloque']. "<br/>" . $rs["horario"], $rs['id_usu']);
             $reservas[] = $reserva;
         }
         $this->desconexion();
@@ -147,7 +147,7 @@ class Controller{
     //Listado de Bloques
     public function listarbloques($fecha, $laboratorio){
         $this->conexion();
-        $sql = "select bloques.id_blo as id, bloques.nombre as nombre, bloques.hora as horario from bloques, reserva, detalles_reserva where bloques.id_blo = detalles_reserva.id_blo and detalles_reserva.id_res = reserva.id_res and reserva.fecha = '$fecha' and reserva.id_sal = $laboratorio group by bloques.nombre order by bloques.nombre;";
+        $sql = "select bloques.id_blo as id, bloques.nombre as nombre, bloques.hora as horario from bloques, reserva, detalles_reserva where bloques.id_blo = detalles_reserva.id_blo and detalles_reserva.id_res = reserva.id_res and reserva.fecha = '$fecha' and reserva.id_sal = $laboratorio group by bloques.nombre order by bloques.nombre asc;";
         $result = $this->mi->query($sql);
         $bloques = array();
         while ($rs = mysqli_fetch_array($result)) {

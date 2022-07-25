@@ -95,6 +95,7 @@ function registraReserva(Form){
             if(data == "1"){
                 swal.fire("Felicidades","Reserva registrada correctamente","success");
                 $("#reservaForm")[0].reset();
+                window.location.href = "reserva.php";
             }else if(data == "0"){
                 swal.fire("Oh OH","Error en el registro","error");
             }else if(date = "2"){

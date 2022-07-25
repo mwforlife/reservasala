@@ -37,24 +37,29 @@ body{
 }
 
 .content-reserve{
-    margin-top: 125px;
     display: flex;
     flex-direction: column;
+    height: 100%;
+    padding-top: 125px;
 }
 .welcome{
     padding: 10px;
     padding-left: 40px;
     font-family: serif;
     margin-left: 200px;
+    font-size: 20px;
 }
 
 .subtitle{
     align-self: center;
     font-family: serif;
+    font-size: 25px;
 }
 
 .lab--img{
     align-self: center;
+    position:fixed;
+    bottom: 50px;
 }
 
 .mis-reservas{

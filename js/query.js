@@ -103,7 +103,7 @@ function iniciarSesion(){
             data: "email="+email+"&pass="+pass,
             success: function(data){
                 if(data == "1"){
-                    windows.location.href = "../reserva.php";
+                    windows.location.href = "reserva.php";
                 }else{
                     alert("Error al iniciar sesión");
                 }
@@ -149,7 +149,7 @@ function desplegarsalas(){
     }else if(cantidad>14){
         $("#sala option").remove();
         $("#sala").append("<option value='0' >Seleccione:</option>");
-        $("#sala").append("<option value='1'>Sala Computación </option>");
+        $("#sala").append("<option value='2'>Sala Computación </option>");
     }else if(cantidad<=0){
         $("#sala option").remove();
         $("#sala").append("<option value='0' >Seleccione:</option>");
@@ -163,7 +163,7 @@ function desplegarbloques(){
     var lab = $("#sala").val();
 
     if (validarcampos(date) && lab>0) {
-
+        console.log(date + " " + lab);
     $.ajax({
         url: "php/DesplegarBloques.php",
         type: "POST",

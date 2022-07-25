@@ -10,8 +10,8 @@ if (strlen($email) < 8) {
     echo "1";
 }else{
     $result = $c->buscartoken($email);
-    if(strlen($result)==40){
-        $message ="http://localhost/reservasala/reset/?token=$result";
+    if(strlen($result)>=30){
+        $message ="https://colegiograneros.cl/reservasala/reset/?token=$result";
         //*********************************************************************** */
         define("DEMO", false); // setting to TRUE will stop the email from sending.
 
@@ -21,8 +21,8 @@ if (strlen($email) < 8) {
         $swap_var = array(
             "{SITE_ADDR}" => "https://www.colegiograneros.cl/reservasala",
             "{EMAIL_LOGO}" => "https://colegiograneros.cl/Inventario/img/logo/log.png",
-            "{EMAIL_TITLE}" => "Restablecer Contraseña",
-            "{CUSTOM_URL}" => "http://http://localhost/reservasala/reset/",
+            "{EMAIL_TITLE}" => "Restablecer Contrase単a",
+            "{CUSTOM_URL}" => "https://colegiograneros.cl/reservasala/reset/",
             "{CUSTOM_IMG}" => "",
             "{TO_EMAIL}" => $email,
             "{EMAIL}" => $email,
@@ -44,13 +44,13 @@ if (strlen($email) < 8) {
         $mail->SMTPSecure = "ssl";
         $mail->Host = "mail.colegiograneros.cl";
         $mail->Port = 465;
-        $mail->Username = "mail";
-        $mail->Password = "password";
-        $mail->From = "mail";
+        $mail->Username = "reservasala@colegiograneros.cl";
+        $mail->Password = "";
+        $mail->From = "reservasala@colegiograneros.cl";
         $mail->FromName = "Sistema de reserva";
-        $mail->Subject = "Restablecer Contraseña";
+        $mail->Subject = "Restablecer Contrase単a";
         $mail->Body = $email_message;
-        $mail->AddAddress($email, "Usuario");
+        $mail->AddAddress($email, "Wilkens Mompoint");
         $mail->IsHTML(true);
         $mail->AltBody = "This is the body in plain text for non-HTML mail clients";
 

@@ -4,7 +4,7 @@ if (!isset($_SESSION['id'])) {
 	header('Location: index.php');
 }
 
-require 'php/controller.php';
+include 'php/controller.php';
 
 $c = new Controller();
 
@@ -36,52 +36,30 @@ $c = new Controller();
 		
 		<?php
 		$lista = $c->listarreservashoy($_SESSION['id']);
-		for ($i=0; $i < count($lista); $i++) { 
-			$r = $lista[$i];
-			echo '<div class="reserva">';
-			echo '<div class="bloque">';
-			echo '<h6 class="name">Bloque: '.$r->getBloque().'</h6>';
-			echo '<h6 class="curso">Curso: '.$r->getCurso().'</h6>';
-			echo '<h6 class="asignatura">Asignatura: '.$r->getAsignatura().'</h6>';
+		if (count($lista) > 0) {
+			for ($i=0; $i < count($lista); $i++) { 
+				$r = $lista[$i];
+				echo '<div class="reserva">';
+				echo '<div class="bloque">';
+				echo '<h6 class="name">'.$r->getBloque().'</h6>';
+				echo '<h6 class="curso">Curso: '.$r->getCurso().'</h6>';
+				if ($r->getSala()==1) {
+					echo '<h6 class="sala">Laboratorio Computación</h6>';
+				}else{
+					echo '<h6 class="sala">Sala Computación</h6>';
+				}
+				echo '<h6 class="asignatura">Asignatura: '.$r->getAsignatura().'</h6>';
+				echo '</div>';
+				echo '</div>';
+			}
+	 	} else {
+			echo '<h6 class="text-center">No hay reservas registradas por hoy</h6>';
 		}
 		?>
 
-		<div class="reserve">
-			<div class="bloque">
-				<h6 class="name">Bloque 1</h6>
-				<h6 class="time">08:30</h6>
-				<h6 class="curso">6B</h6>
-				<h6 class="asignatura">Tecnología</h6>
-			</div>
-		</div>
 		
 		
-		<div class="reserve">
-			<div class="bloque">
-				<h6 class="name">Bloque 1</h6>
-				<h6 class="time">08:30</h6>
-				<h6 class="curso">6B</h6>
-				<h6 class="asignatura">Tecnología</h6>
-			</div>
-		</div>
 		
-		<div class="reserve">
-			<div class="bloque">
-				<h6 class="name">Bloque 1</h6>
-				<h6 class="time">08:30</h6>
-				<h6 class="curso">6B</h6>
-				<h6 class="asignatura">Tecnología</h6>
-			</div>
-		</div>
-		
-		<div class="reserve">
-			<div class="bloque">
-				<h6 class="name">Bloque 1</h6>
-				<h6 class="time">08:30</h6>
-				<h6 class="curso">6B</h6>
-				<h6 class="asignatura">Tecnología</h6>
-			</div>
-		</div>
 	</div>
 		
 	</div>
@@ -105,7 +83,7 @@ $c = new Controller();
 	</header>
 	
 	<main class="content-reserve">
-		<h3 class="welcome">Bienvenid@, <?php echo $_SESSION['nombre'] ?></h3>
+		<h3 class="welcome">Bienvenid@, <?php echo $_SESSION['nombre']." ".$_SESSION['apellido']; ?></h3>
 		<h2 class="subtitle">Registra Su Hora para evitar retrasos en sus actividades</h2>
 		<img src="img/lab.png" alt="" class="lab--img">
 	</main>
@@ -201,71 +179,30 @@ $c = new Controller();
 				
 								<?php
 								$lista = $c->listarreserva($_SESSION['id']);
+
+								if (count($lista) > 0) {
 								for ($i=0; $i < count($lista); $i++) { 
 									$r = $lista[$i];
 									echo '<div class="reserve">';
 									echo '<div class="bloque">';
-									echo '<h6 class="name">Bloque: '.$r->getBloque().'</h6>';
+									echo '<h6 class="name">'.$r->getBloque().'</h6>';
 									echo "<h6 class='name'>Fecha: ".$r->getFecha()."</h6>";
 									echo '<h6 class="curso">Curso: '.$r->getCurso().'</h6>';
+									if ($r->getSala()==1) {
+										echo '<h6 class="sala">Laboratorio Computación</h6>';
+									}else{
+										echo '<h6 class="sala">Sala Computación</h6>';
+									}
 									echo '<h6 class="asignatura">Asignatura: '.$r->getAsignatura().'</h6>';
-									
+									echo '</div>';
+									echo '</div>';
+								}
+								}else{
+									echo '<h6 class="name">No hay reservas registradas</h6>';
 								}
 								?>
 
-					<button class="reserve">
-						<div class="bloque">
-							<h6 class="name">Bloque 1</h6>
-							<h6 class="name">12-06-2022</h6>
-							<h6 class="time">08:30</h6>
-							<h6 class="curso">6B</h6>
-							<h6 class="asignatura">Tecnología</h6>
-						</div>
-					</button>
-				
 					
-					<button class="reserve">
-						<div class="bloque">
-							<h6 class="name">Bloque 1</h6>
-							<h6 class="name">12-06-2022</h6>
-							<h6 class="time">08:30</h6>
-							<h6 class="curso">6B</h6>
-							<h6 class="asignatura">Tecnología</h6>
-						</div>
-					</button>
-					
-					
-					<button class="reserve">
-						<div class="bloque">
-							<h6 class="name">Bloque 1</h6>
-							<h6 class="name">12-06-2022</h6>
-							<h6 class="time">08:30</h6>
-							<h6 class="curso">6B</h6>
-							<h6 class="asignatura">Tecnología</h6>
-						</div>
-					</button>
-					
-					
-					<button class="reserve">
-						<div class="bloque">
-							<h6 class="name">Bloque 1</h6>
-							<h6 class="name">12-06-2022</h6>
-							<h6 class="time">08:30</h6>
-							<h6 class="curso">6B</h6>
-							<h6 class="asignatura">Tecnología</h6>
-						</div>
-					</button>
-					
-					
-					<button class="reserve">
-						<div class="bloque">
-							<h6 class="name">Bloque 1</h6>
-							<h6 class="name">12-06-2022</h6>
-							<h6 class="time">08:30</h6>
-							<h6 class="curso">6B</h6>
-							<h6 class="asignatura">Tecnología</h6>
-						</div>
-					</button>
 
 			  </div>
 			  <div class="modal-footer">
