@@ -147,7 +147,7 @@ class Controller{
    //Lista de reservas 
    public function listarTodaslasreservas(){
     $this->conexion();
-    $sql = "select reserva.id_res, cant_alu as cantidad, id_sal, asignatura, reserva.fecha, curso.nombre as id_cur, bloques.nombre as bloque, bloques.hora as horario, users.nombre as nombre, users.apellido as apellido from reserva,bloques, detalles_reserva,curso,users where users.id_usu=reserva.id_usu and reserva.id_res = detalles_reserva.id_res and detalles_reserva.id_blo = bloques.id_blo and reserva.id_cur = curso.id_cur and reserva.fecha>=curdate();";
+    $sql = "select reserva.id_res, cant_alu as cantidad, id_sal, asignatura, reserva.fecha, curso.nombre as id_cur, bloques.nombre as bloque, bloques.hora as horario, users.nombre as nombre, users.apellido as apellido from reserva,bloques, detalles_reserva,curso,users where users.id_usu=reserva.id_usu and reserva.id_res = detalles_reserva.id_res and detalles_reserva.id_blo = bloques.id_blo and reserva.id_cur = curso.id_cur and reserva.fecha>curdate();";
     $result = $this->mi->query($sql);
     $reservas = array();
     while ($rs = mysqli_fetch_array($result)) {
