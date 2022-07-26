@@ -1,5 +1,5 @@
 <?php
-require 'reserva.php';
+require 'reservas.php';
 require 'bloque.php';
 require 'curso.php';
 require 'detalle_reserva.php';
@@ -11,8 +11,8 @@ class Controller{
 
     //Conexion a la base de datos
     public function conexion(){
-        //$this->mi = new mysqli("localhost", "root", "", "reserva");
-        $this->mi = new mysqli("localhost", "colegi38_informatica", "informatica2022", "colegi38_inventario");
+        $this->mi = new mysqli("localhost", "root", "", "reserva");
+        //$this->mi = new mysqli("localhost", "colegi38_informatica", "informatica2022", "colegi38_inventario");
         if ($this->mi->connect_errno) {
             echo "Fallo al conectar a MySQL: (" . $this->mi->connect_errno . ") " . $this->mi->connect_error;
         }    
