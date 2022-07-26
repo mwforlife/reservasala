@@ -46,6 +46,45 @@ window.onload = function(){
     });
 }
 
+$(document).ready(function() {
+    $(".table").DataTable({
+        "language": {
+            "lengthMenu": "Mostrar _MENU_ registros por página",
+            "zeroRecords": "No se encontraron resultados",
+            "info": "Página _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay registros",
+            "infoFiltered": "(filtrado de _MAX_ registros)",
+            "search": "Buscar:",
+            "previous": "Anterior",
+            "next": "Siguiente",
+            "loadingRecords": "Cargando...",
+            "processing": "Procesando...",
+            "paginate": {
+                "first": "Primero",
+                "last": "Último",
+                "next": "Siguiente",
+                "previous": "Anterior"
+            },
+            "columnDefs": [{
+                "target":0,
+                "orderable": false
+            }],
+            "columnDefs": [{
+                "target":1,
+                "orderable": false
+            }],
+            "columnDefs": [{
+                "target":2,
+                "orderable": false
+            }],
+            "columnDefs": [{
+                "target":3,
+                "orderable": false
+            }]
+        }
+    });
+});
+
 function registrarUsuario(){
     var rut = $("#ruttxt").val();
     var nombre = $("#nomtxt").val();

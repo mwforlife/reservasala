@@ -3,6 +3,7 @@ require 'reserva.php';
 require 'bloque.php';
 require 'curso.php';
 require 'detalle_reserva.php';
+require 'Usuarios.php';
 class Controller{
     
     //Variables de clase
@@ -10,7 +11,8 @@ class Controller{
 
     //Conexion a la base de datos
     public function conexion(){
-        $this->mi = new mysqli("localhost", "root", "", "reserva");
+        //$this->mi = new mysqli("localhost", "root", "", "reserva");
+        $this->mi = new mysqli("localhost", "colegi38_informatica", "informatica2022", "colegi38_inventario");
         if ($this->mi->connect_errno) {
             echo "Fallo al conectar a MySQL: (" . $this->mi->connect_errno . ") " . $this->mi->connect_error;
         }    
@@ -41,6 +43,19 @@ class Controller{
         $result = $this->mi->query($sql);
         $this->desconexion();
         return json_encode($result);
+    }
+
+    public function listarUsuarios(){
+        $this->conexion();
+        $sql = "select * from users where id_tip!=1";
+        $result = $this->mi->query($sql);
+        $lista = array();
+        while ($rs = mysqli_fetch_array($result)) {
+            $usuario = new Usuarios($rs['id_usu'], $rs['rut'], $rs['nombre'], $rs['apellido'], $rs['correo'], $rs['fecha']);
+            $lista[] = $usuario;
+        }
+        $this->desconexion();
+        return $lista;
     }
 
     //Inicio de sesion
@@ -147,11 +162,11 @@ class Controller{
    //Lista de reservas 
    public function listarTodaslasreservas(){
     $this->conexion();
-    $sql = "select reserva.id_res, cant_alu as cantidad, id_sal, asignatura, reserva.fecha, curso.nombre as id_cur, bloques.nombre as bloque, bloques.hora as horario, users.nombre as nombre, users.apellido as apellido from reserva,bloques, detalles_reserva,curso,users where users.id_usu=reserva.id_usu and reserva.id_res = detalles_reserva.id_res and detalles_reserva.id_blo = bloques.id_blo and reserva.id_cur = curso.id_cur and reserva.fecha>curdate();";
+    $sql = "select reserva.id_res, cant_alu as cantidad, sala.nombre as sala, asignatura, reserva.fecha, curso.nombre as id_cur, bloques.nombre as bloque, bloques.hora as horario, users.nombre as nombre, users.apellido as apellido from sala, reserva,bloques, detalles_reserva,curso,users where sala.id_sal=reserva.id_sal and users.id_usu=reserva.id_usu and reserva.id_res = detalles_reserva.id_res and detalles_reserva.id_blo = bloques.id_blo and reserva.id_cur = curso.id_cur and reserva.fecha>curdate();";
     $result = $this->mi->query($sql);
     $reservas = array();
     while ($rs = mysqli_fetch_array($result)) {
-        $Det = new Detalle_Reserva($rs['id_res'], $rs['cantidad'], $rs['id_sal'],$rs['id_cur'], $rs['asignatura'], $rs['fecha'],  $rs['bloque']. "<br/>" . $rs["horario"], $rs['nombre'] ." ". $rs['apellido']);
+        $Det = new Detalle_Reserva($rs['id_res'], $rs['cantidad'], $rs['sala'],$rs['id_cur'], $rs['asignatura'], $rs['fecha'],  $rs['bloque']. "<br/>" . $rs["horario"], $rs['nombre'] ." ". $rs['apellido']);
         $reservas[] = $Det;
     }
     $this->desconexion();

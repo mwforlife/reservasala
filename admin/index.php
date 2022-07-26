@@ -10,6 +10,8 @@ $c = new Controller();
     <title>Reserva Sala | Admin</title>
     <link rel="icon" href="../img/log.png">
     <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../DataTables/datatables.min.css">
+
 </head>
 <body>
         <header class="header">
@@ -61,7 +63,7 @@ $c = new Controller();
         <div class="row justify-content-center">
             <div class="col-md-8">
                <h3 class="text-center bg-info">Todas las reservas</h3>
-                <table class="table table-dark">
+                <table id="reserve_list" class="table table-dark">
                    <thead>
                        <tr>
                         <th>ID</th>
@@ -95,9 +97,43 @@ $c = new Controller();
                 </table>
             </div>
         </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <h3 class="text-center bg-warning text-white">Listado de Usuarios</h3>
+                <table id="user_list" class="table table-dark">
+                    <thead>
+                    <tr>
+                        <th>Rut</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Correo</th>
+                        <th>Fecha de Registro</th>
+                    </tr>    
+                    </thead>
+                    <tbody>
+                        <?php
+                        $lista = $c->listarUsuarios();
+                        for ($i=0; $i < count($lista); $i++) { 
+                            $d = $lista[$i];
+                            echo "<tr>";
+                            echo "<td>".$d->getRut()."</td>";
+                            echo "<td>".$d->getNombre()."</td>";
+                            echo "<td>".$d->getApellido()."</td>";
+                            echo "<td>".$d->getCorreo()."</td>";
+                            echo "<td>".$d->getRegistro()."</td>";
+                            echo "</tr>";
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
         
         
         <script src="../js/jquery-3.6.0.js"></script>
         <script src="../js/bootstrap.bundle.js"></script>
+    <script src="../DataTables/datatables.min.js"></script>
+    <script src="../js/query.js"></script>
 </body>
 </html>
